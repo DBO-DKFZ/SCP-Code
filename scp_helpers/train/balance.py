@@ -11,7 +11,7 @@ def downsample_df(df:pd.DataFrame, y_column:str, min_size:int=None, random_state
     '''Balance classes of the target variable by downsampling all classes to be equal to or smaller than "min_size".
 
     Classes smaller than "min_size" are not affected and will remain at their current size. If "min_size" is ommitted,
-    the size of the smallest current class is taken as "min_size". TEST.
+    the size of the smallest current class is taken as "min_size".
     '''
     df_new = df.copy()#.reset_index(drop=True)
 
