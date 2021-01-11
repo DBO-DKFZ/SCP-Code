@@ -12,6 +12,12 @@ entries:
     - output: web,pdf
       title: Balance training data
       url: /train.balance
+    - output: web,pdf
+      title: General utility functions
+      url: /utils.general
+    - output: web,pdf
+      title: Modify python dictionaries
+      url: /utils.dict
     output: web
     title: scp_helpers
   output: web

@@ -4,9 +4,17 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"downsample_df": "00_train.balance.ipynb",
          "upsample_df": "00_train.balance.ipynb",
-         "balance_df": "00_train.balance.ipynb"}
+         "balance_df": "00_train.balance.ipynb",
+         "load_config_yaml": "01_utils.general.ipynb",
+         "apply_to_vals": "02_utils.dict.ipynb",
+         "remove_key": "02_utils.dict.ipynb",
+         "flatten_intra": "02_utils.dict.ipynb",
+         "flatten_inter_helper": "02_utils.dict.ipynb",
+         "flatten_inter": "02_utils.dict.ipynb"}
 
-modules = ["train/balance.py"]
+modules = ["train/balance.py",
+           "utils/general.py",
+           "utils/dict.py"]
 
 doc_url = "https://maronr.github.io/scp_helpers/"
 

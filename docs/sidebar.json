@@ -1,6 +1,8 @@
 {
   "scp_helpers": {
     "Overview": "/",
-    "Balance training data": "/train.balance"
+    "Balance training data": "/train.balance",
+    "General utility functions": "/utils.general",
+    "Modify python dictionaries": "/utils.dict"
   }
 }
