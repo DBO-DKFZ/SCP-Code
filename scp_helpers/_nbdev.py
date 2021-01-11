@@ -16,8 +16,8 @@ modules = ["train/balance.py",
            "utils/general.py",
            "utils/dict.py"]
 
-doc_url = "https://maronr.github.io/scp_helpers/"
+doc_url = "https://dbo-dkfz.github.io/scp_helpers/"
 
-git_url = "https://github.com/maronr/scp_helpers/tree/master/"
+git_url = "https://github.com/dbo-dkfz/scp_helpers/tree/master/"
 
 def custom_doc_links(name): return None
