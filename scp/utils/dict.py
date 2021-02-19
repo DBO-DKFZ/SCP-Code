@@ -7,15 +7,19 @@ import pandas as pd
 import numpy as np
 
 # Cell
-def apply_to_vals(nested_dict, func):
+def apply_to_vals(nested_dict, func, use_key:bool=False):
     '''Applies a function "func" to all non-dict values of a (nested) dictionary'''
     new_dict = dict()
 
     for k, v in nested_dict.items():
         if isinstance(v, dict):
-            new_dict[k] = apply_to_vals(v, func)
+            new_dict[k] = apply_to_vals(v, func, use_key)
         else:
-            new_dict[k] = func(v)
+            if use_key:
+                new_dict[k] = func(k, v)
+            else:
+                new_dict[k] = func(v)
+
     return new_dict
 
 # Cell

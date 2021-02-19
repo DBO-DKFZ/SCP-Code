@@ -6,15 +6,34 @@ index = {"downsample_df": "00_train.balance.ipynb",
          "upsample_df": "00_train.balance.ipynb",
          "balance_df": "00_train.balance.ipynb",
          "load_config_yaml": "01_utils.general.ipynb",
+         "p2t": "01_utils.general.ipynb",
+         "t2p": "01_utils.general.ipynb",
+         "a2p": "01_utils.general.ipynb",
          "apply_to_vals": "02_utils.dict.ipynb",
          "remove_key": "02_utils.dict.ipynb",
          "flatten_intra": "02_utils.dict.ipynb",
          "flatten_inter_helper": "02_utils.dict.ipynb",
-         "flatten_inter": "02_utils.dict.ipynb"}
+         "flatten_inter": "02_utils.dict.ipynb",
+         "Corruption": "03_projects.robustness_benchmark.ipynb",
+         "Perturbation": "03_projects.robustness_benchmark.ipynb",
+         "max_severity": "03_projects.robustness_benchmark.ipynb",
+         "num_frames": "03_projects.robustness_benchmark.ipynb",
+         "classes": "03_projects.robustness_benchmark.ipynb",
+         "bal_error_rate": "03_projects.robustness_benchmark.ipynb",
+         "error_rate": "03_projects.robustness_benchmark.ipynb",
+         "auroc": "03_projects.robustness_benchmark.ipynb",
+         "flip_rate": "03_projects.robustness_benchmark.ipynb",
+         "adjust_by_baseline": "03_projects.robustness_benchmark.ipynb",
+         "relative_perf": "03_projects.robustness_benchmark.ipynb",
+         "threshold_argmax": "04_analysis.binary.ipynb",
+         "youdens_jstats": "04_analysis.binary.ipynb",
+         "performance": "04_analysis.binary.ipynb"}
 
 modules = ["train/balance.py",
            "utils/general.py",
-           "utils/dict.py"]
+           "utils/dict.py",
+           "projects/robustness_benchmark.py",
+           "analysis/binary.py"]
 
 doc_url = "https://dbo-dkfz.github.io/scp/"
 
