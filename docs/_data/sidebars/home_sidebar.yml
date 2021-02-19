@@ -18,6 +18,12 @@ entries:
     - output: web,pdf
       title: Modify python dictionaries
       url: /utils.dict
+    - output: web,pdf
+      title: Robustness Benchmark
+      url: /projects.robustness_benchmark
+    - output: web,pdf
+      title: Binary analysis
+      url: /analysis.binary
     output: web
     title: scp
   output: web

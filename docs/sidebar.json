@@ -3,6 +3,8 @@
     "Overview": "/",
     "Balance training data": "/train.balance",
     "General utility functions": "/utils.general",
-    "Modify python dictionaries": "/utils.dict"
+    "Modify python dictionaries": "/utils.dict",
+    "Robustness Benchmark": "/projects.robustness_benchmark",
+    "Binary analysis": "/analysis.binary"
   }
 }

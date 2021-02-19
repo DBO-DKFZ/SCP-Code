@@ -58,7 +58,7 @@ description: "Various methods to balance training data by target class (label) f
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="downsample_df" class="doc_header"><code>downsample_df</code><a href="https://github.com/maronr/scp_helpers/tree/master/scp_helpers/train/balance.py#L10" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>downsample_df</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>y_column</code></strong>:<code>str</code>, <strong><code>min_size</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>random_state</code></strong>:<code>int</code>=<em><code>115</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="downsample_df" class="doc_header"><code>downsample_df</code><a href="https://github.com/dbo-dkfz/scp/tree/master/scp/train/balance.py#L10" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>downsample_df</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>y_column</code></strong>:<code>str</code>, <strong><code>min_size</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>random_state</code></strong>:<code>int</code>=<em><code>115</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Balance classes of the target variable by downsampling all classes to be equal to or smaller than "min_size".</p>
 <p>Classes smaller than "min_size" are not affected and will remain at their current size. If "min_size" is ommitted,
@@ -265,7 +265,7 @@ the size of the smallest current class is taken as "min_size".</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="upsample_df" class="doc_header"><code>upsample_df</code><a href="https://github.com/maronr/scp_helpers/tree/master/scp_helpers/train/balance.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>upsample_df</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>y_column</code></strong>:<code>str</code>, <strong><code>max_size</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>random_state</code></strong>:<code>int</code>=<em><code>115</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="upsample_df" class="doc_header"><code>upsample_df</code><a href="https://github.com/dbo-dkfz/scp/tree/master/scp/train/balance.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>upsample_df</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>y_column</code></strong>:<code>str</code>, <strong><code>max_size</code></strong>:<code>int</code>=<em><code>None</code></em>, <strong><code>random_state</code></strong>:<code>int</code>=<em><code>115</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Balance classes of the target variable by upsampling all classes to be equal to or larger than "max_size".</p>
 <p>Classes larger than "max_size" are not affected and will remain at their current size. If "max_size" is ommitted,
@@ -472,7 +472,7 @@ the size of the largest class is taken as "max_size".</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="balance_df" class="doc_header"><code>balance_df</code><a href="https://github.com/maronr/scp_helpers/tree/master/scp_helpers/train/balance.py#L53" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>balance_df</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>y_column</code></strong>:<code>str</code>, <strong><code>size</code></strong>:<code>int</code>, <strong><code>random_state</code></strong>:<code>int</code>=<em><code>115</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="balance_df" class="doc_header"><code>balance_df</code><a href="https://github.com/dbo-dkfz/scp/tree/master/scp/train/balance.py#L53" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>balance_df</code>(<strong><code>df</code></strong>:<code>DataFrame</code>, <strong><code>y_column</code></strong>:<code>str</code>, <strong><code>size</code></strong>:<code>int</code>, <strong><code>random_state</code></strong>:<code>int</code>=<em><code>115</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Balance classes of the target variable by up- or downsampling all classes to be equal to "size".</p>
 
