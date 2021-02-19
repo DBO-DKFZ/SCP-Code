@@ -19,6 +19,6 @@ entries:
       title: Modify python dictionaries
       url: /utils.dict
     output: web
-    title: scp_helpers
+    title: scp
   output: web
   title: Sidebar

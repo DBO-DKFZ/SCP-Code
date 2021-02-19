@@ -1,5 +1,5 @@
 {
-  "scp_helpers": {
+  "scp": {
     "Overview": "/",
     "Balance training data": "/train.balance",
     "General utility functions": "/utils.general",
