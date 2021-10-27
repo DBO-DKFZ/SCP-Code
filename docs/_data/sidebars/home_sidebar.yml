@@ -10,20 +10,32 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Balance training data
-      url: /train.balance
+      title: Binary analysis
+      url: nb_analysis.binary.html
     - output: web,pdf
-      title: General utility functions
-      url: /utils.general
-    - output: web,pdf
-      title: Modify python dictionaries
-      url: /utils.dict
+      title: General inference methods
+      url: nb_inference.general.html
     - output: web,pdf
       title: Robustness Benchmark
-      url: /projects.robustness_benchmark
+      url: nb_projects.robustness_benchmark.html
     - output: web,pdf
-      title: Binary analysis
-      url: /analysis.binary
+      title: Self-supervised Learning
+      url: nb_projects.self_supervised.html
+    - output: web,pdf
+      title: Balance training data
+      url: nb_train.balance.html
+    - output: web,pdf
+      title: General training methods
+      url: nb_train.general.html
+    - output: web,pdf
+      title: Training Metrics
+      url: nb_train.metrics.html
+    - output: web,pdf
+      title: Modify python dictionaries
+      url: nb_utils.dict.html
+    - output: web,pdf
+      title: General utility functions
+      url: nb_utils.general.html
     output: web
     title: scp
   output: web

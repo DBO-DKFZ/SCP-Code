@@ -1,10 +1,14 @@
 {
   "scp": {
     "Overview": "/",
-    "Balance training data": "/train.balance",
-    "General utility functions": "/utils.general",
-    "Modify python dictionaries": "/utils.dict",
-    "Robustness Benchmark": "/projects.robustness_benchmark",
-    "Binary analysis": "/analysis.binary"
+    "Binary analysis": "nb_analysis.binary.html",
+    "General inference methods": "nb_inference.general.html",
+    "Robustness Benchmark": "nb_projects.robustness_benchmark.html",
+    "Self-supervised Learning": "nb_projects.self_supervised.html",
+    "Balance training data": "nb_train.balance.html",
+    "General training methods": "nb_train.general.html",
+    "Training Metrics": "nb_train.metrics.html",
+    "Modify python dictionaries": "nb_utils.dict.html",
+    "General utility functions": "nb_utils.general.html"
   }
 }
