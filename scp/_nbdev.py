@@ -60,7 +60,8 @@ index = {"threshold_argmax": "nb_analysis.binary.ipynb",
          "convert_state_dict": "nb_utils.general.ipynb",
          "custom_save": "nb_utils.general.ipynb",
          "custom_load": "nb_utils.general.ipynb",
-         "zip_dir": "nb_utils.general.ipynb"}
+         "zip_dir": "nb_utils.general.ipynb",
+         "isnotebook": "nb_utils.general.ipynb"}
 
 modules = ["analysis/binary.py",
            "inference/general.py",
