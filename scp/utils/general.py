@@ -16,6 +16,7 @@ from zipfile import ZipFile
 from os.path import basename
 
 
+
 # Cell
 def load_config_yaml(path_to_yaml):
     '''Load project config yaml and change relative paths to absolute paths'''
