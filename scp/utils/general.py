@@ -18,17 +18,15 @@ from os.path import basename
 
 
 # Cell
-def load_config_yaml(path_to_yaml, parent_dir=None):
+def load_config_yaml(path_to_yaml, parent_dir):
     '''Load project config yaml and change relative paths to absolute paths'''
 
     with open(path_to_yaml) as file:
         config = yaml.load(file, Loader=yaml.FullLoader)
 
-    if not parent_dir:
-        parent_dir = Path(os.path.dirname(os.getcwd()))
     for k, v in config.items():
         if "path" in k:
-            config[k] = parent_dir/v
+            config[k] = Path(parent_dir)/v
     return config
 
 # Cell
