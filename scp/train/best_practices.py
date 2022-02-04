@@ -38,8 +38,8 @@ class LiuProcedure():
     They ensembled a total of 18 models. Each of these 18 models is itself an ensemble
     of 5 models which were obtained through 5-fold cross-validation.
 
-    Notes
-    -----
+    Model notes
+    -----------
     EfficientNet-B0: 5.3M
     EfficientNet-B1: 7.8M
     EfficientNet-B2: 9.2M
@@ -50,6 +50,25 @@ class LiuProcedure():
     EfficientNet-B7: 66M
     SE-ResNeXt-101 : ??M
     ResNeSt-101    : 48M
+
+    Class labels
+    ------------
+    Good to know for future classifications tasks aimed to be similar.
+    For four classes: {'BKL': 0, 'melanoma': 1, 'nevus': 2, 'unknown': 3}
+    For nine classes: {'AK': 0, 'BCC': 1, 'BKL': 2, 'DF': 3, 'SCC': 4,
+                       'VASC': 5, 'melanoma': 6, 'nevus': 7, 'unknown': 8}
+
+    seborrheic keratosis -> BKL
+    lichenoid keratosis -> BKL
+    solar lentigo -> BKL
+    lentigo NOS -> BKL
+    cafe-au-lait macule -> unknown
+    atypical melanocytic proliferation -> unknown
+    DF -> unknown
+    AK -> unknown
+    SCC -> unknown
+    VASC -> unknown
+    BCC -> unknown
     '''
     @staticmethod
     def get_transforms(img_size):
@@ -133,8 +152,8 @@ class LiuProcedure():
         '''
         warmup_start_lr = lr/10 # default
         if discriminative_lr:
-            warmup_start_lr = 0.0 # special case
-
+            warmup_start_lr = 0. # special case
+        print(warmup_start_lr)
         optimizer = torch.optim.Adam(params, lr=lr)
         scheduler = LinearWarmupCosineAnnealingLR(
             optimizer=optimizer,

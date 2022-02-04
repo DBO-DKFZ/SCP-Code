@@ -6,6 +6,8 @@ __all__ = ['DataFrameDataModule', 'DataFrameImageDataset']
 from torch.utils.data import DataLoader
 from torchsampler import ImbalancedDatasetSampler
 from pytorch_lightning import LightningDataModule
+from .dataset import DataFrameImageDataset
+import pandas as pd
 
 # Cell
 class DataFrameDataModule(LightningDataModule):
@@ -75,33 +77,84 @@ class DataFrameDataModule(LightningDataModule):
         self.setup()
 
     def setup(self, stage=None):
-        self.train_ds = DataFrameImageDataset(self.df[self.df[self.set_col]=="train"], self.img_col,
-                                           self.label_col, self.root, self.transforms.get("train"), self.label_names)
-        self.val_ds = DataFrameImageDataset(self.df[self.df[self.set_col]=="val"], self.img_col,
-                                           self.label_col, self.root, self.transforms.get("val"), self.label_names)
-        self.test_ds = DataFrameImageDataset(self.df[self.df[self.set_col]=="test"], self.img_col,
-                                           self.label_col, self.root, self.transforms.get("test"), self.label_names)
-        self.predict_ds = DataFrameImageDataset(self.df[self.df[self.set_col]=="predict"], self.img_col,
-                                           self.label_col, self.root, self.transforms.get("predict"), self.label_names)
+        self.train_dss = self._get_datasets(set_name="train")
+        self.val_dss = self._get_datasets(set_name="val")
+        self.test_dss = self._get_datasets(set_name="test")
+        self.predict_dss = self._get_datasets(set_name="predict")
 
     def train_dataloader(self):
         sampler, shuffle = None, True
         if self.balance_train_ds:
-            sampler, shuffle = ImbalancedDatasetSampler(self.train_ds), False
-        return DataLoader(self.train_ds, batch_size=self.batch_size,
-                          num_workers=self.num_workers, sampler=sampler)
+            sampler, shuffle = ImbalancedDatasetSampler, False
+        return self._get_dataloaders(self.train_dss, sampler, shuffle)[0] # DO not want to implement multiple dl trainging
 
     def val_dataloader(self):
-        return DataLoader(self.val_ds, batch_size=self.batch_size,
-                          num_workers=self.num_workers, shuffle=False)
+        sampler, shuffle = None, False
+        return self._get_dataloaders(self.val_dss, sampler, shuffle)
 
     def test_dataloader(self):
-        return DataLoader(self.test_ds, batch_size=self.batch_size,
-                          num_workers=self.num_workers, shuffle=False)
+        sampler, shuffle = None, False
+        return self._get_dataloaders(self.test_dss, sampler, shuffle)[0]
 
     def predict_dataloader(self):
-        return DataLoader(self.predict_ds, batch_size=self.batch_size,
-                          num_workers=self.num_workers, shuffle=False)
+        sampler, shuffle = None, False
+        return self._get_dataloaders(self.predict_dss, sampler, shuffle)[0]
+
+    def _get_dataloaders(self, dss, sampler, shuffle):
+        dls = list()
+        for ds in dss:
+
+            sampler_instance = None
+            if sampler:
+                sampler_instance = sampler(ds)
+
+            dls.append(DataLoader(
+                dataset=ds,
+                batch_size=self.batch_size,
+                num_workers=self.num_workers,
+                sampler=sampler_instance,
+                shuffle=shuffle
+            ))
+
+        return dls
+
+    def _get_datasets(self, set_name):
+        '''Get dataset(s) for a particular set.
+
+        Parameters
+        ----------
+        set_name : str
+            Should be one of ´train´, ´val´, ´test´ or ´predict´
+
+        Returns
+        -------
+        List with at least one ´DataFrameImageDataset´ (which could be empty)
+        '''
+
+        set_df = self.df[self.df[self.set_col].str.contains(set_name)]
+
+        # get subset dataframe(s) for this particular set
+        subset_dfs = list()
+        for _, subset_df in set_df.groupby(self.set_col, sort=True):
+            subset_dfs.append(subset_df.reset_index(drop=True))
+
+        # in case no subsets where found, add empty df for compatibility
+        if len(subset_dfs)==0:
+            subset_dfs.append(pd.DataFrame(columns=set_df.columns))
+
+        # create dataset(s) for this particular set
+        subset_dss = list()
+        for subset_df in subset_dfs:
+            subset_dss.append(DataFrameImageDataset(
+                df=subset_df,
+                img_col=self.img_col,
+                label_col=self.label_col,
+                root=self.root,
+                img_transform=self.transforms.get(set_name),
+                label_names=self.label_names,
+            ))
+
+        return subset_dss
 
 # Cell
 import os
