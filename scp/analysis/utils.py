@@ -24,7 +24,7 @@ def concat_preds(preds_list:list) -> tuple:
     probs = torch.cat(tuple([v[0] for v in preds_list]))
     gt = torch.cat(tuple([v[1] for v in preds_list]))
 
-    return (probs, torch.cat(gt))
+    return (probs, gt)
 
 def ensemble(preds_list:list) -> tuple:
     '''Ensemble a list of fastai-style-like predictions into a single fastai-style-like prediction.

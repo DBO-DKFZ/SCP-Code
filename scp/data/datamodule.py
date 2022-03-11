@@ -74,11 +74,18 @@ class MultiLabelDataFrameDataModule(LightningDataModule):
         self.num_workers = num_workers
         self.balance_train_ds = balance_train_ds
 
-    def setup(self, stage=None):
-        self._train_dss = self._get_datasets(set_name="train")
-        self._val_dss = self._get_datasets(set_name="val")
-        self._test_dss = self._get_datasets(set_name="test")
-        self._predict_dss = self._get_datasets(set_name="predict")
+        self.setup_called = False
+
+    def setup(self, stage=None, ):
+
+        if self.setup_called:
+            print("Setup has already been called. Set attribute 'setup_called=False' if you want to explicitly reset this.")
+        else:
+            self.setup_called = True
+            self._train_dss, self.train_dss_names = self._get_datasets(set_name="train")
+            self._val_dss, self.val_dss_names = self._get_datasets(set_name="val")
+            self._test_dss, self.test_dss_names = self._get_datasets(set_name="test")
+            self._predict_dss, self.predict_dss_names = self._get_datasets(set_name="predict")
 
     def train_dataloader(self, idx=0):
         sampler, shuffle = None, True
@@ -96,14 +103,14 @@ class MultiLabelDataFrameDataModule(LightningDataModule):
             return dls[idx]
         return dls
 
-    def test_dataloader(self, idx=0):
+    def test_dataloader(self, idx=None):
         sampler, shuffle = None, False
         dls = self._get_dataloaders(self._test_dss, sampler, shuffle)
         if idx != None:
             return dls[idx]
         return dls
 
-    def predict_dataloader(self, idx=0):
+    def predict_dataloader(self, idx=None):
         sampler, shuffle = None, False
         dls = self._get_dataloaders(self._predict_dss, sampler, shuffle)
         if idx != None:
@@ -115,17 +122,17 @@ class MultiLabelDataFrameDataModule(LightningDataModule):
             return self._train_dss[idx]
         return self._train_dss
 
-    def val_dataset(self, idx=0):
+    def val_dataset(self, idx=None):
         if idx != None:
             return self._val_dss[idx]
         return self._val_dss
 
-    def test_dataset(self, idx=0):
+    def test_dataset(self, idx=None):
         if idx != None:
             return self._test_dss[idx]
         return self._test_dss
 
-    def predict_dataset(self, idx=0):
+    def predict_dataset(self, idx=None):
         if idx != None:
             return self._predict_dss[idx]
         return self._predict_dss
@@ -164,12 +171,15 @@ class MultiLabelDataFrameDataModule(LightningDataModule):
         set_df = self.df[self.df[self.set_col].str.contains(set_name)]
 
         # get subset dataframe(s) for this particular set
+        subset_names = list()
         subset_dfs = list()
-        for _, subset_df in set_df.groupby(self.set_col, sort=True):
+        for subset_name, subset_df in set_df.groupby(self.set_col, sort=True):
+            subset_names.append(subset_name)
             subset_dfs.append(subset_df.reset_index(drop=True))
 
         # in case no subsets where found, add empty df for compatibility
         if len(subset_dfs)==0:
+            subset_names.append(set_name)
             subset_dfs.append(pd.DataFrame(columns=set_df.columns))
 
         # create dataset(s) for this particular set
@@ -184,7 +194,7 @@ class MultiLabelDataFrameDataModule(LightningDataModule):
                 label_class_names=self.label_class_names,
             ))
 
-        return subset_dss
+        return subset_dss, subset_names
 
     def update_ds_tfms(self, set_name, idx, tfms):
         if set_name=="train":
