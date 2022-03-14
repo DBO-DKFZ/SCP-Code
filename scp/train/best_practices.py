@@ -158,7 +158,7 @@ class LiuProcedure():
         scheduler = LinearWarmupCosineAnnealingLR(
             optimizer=optimizer,
             warmup_epochs=warmup_epochs,
-            max_epochs=epochs-1,
+            max_epochs=epochs,
             warmup_start_lr=warmup_start_lr
         )
 
