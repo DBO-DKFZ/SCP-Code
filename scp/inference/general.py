@@ -8,6 +8,7 @@ import numpy as np
 from pytorch_lightning.callbacks import BasePredictionWriter
 import torch
 import os
+from pathlib import Path
 
 # Cell
 def convert_test_df(df):
@@ -21,46 +22,6 @@ def convert_test_df(df):
     return val.append(dummy_train, ignore_index=True)
 
 # Cell
-# class PredictionWriter(BasePredictionWriter):
-#     '''Blabla
-
-#     Parameters
-#     ----------
-
-#     splits : dict; optional
-#         Contains
-
-#     '''
-#     def __init__(self, output_dir, output_file, write_interval, splits=None):
-#         super().__init__(write_interval)
-#         self.output_dir = output_dir
-#         self.output_file = output_file
-#         self.splits = splits
-
-#     def write_on_epoch_end(self, trainer, pl_module, predictions, batch_indices):
-#         predictions = predictions[0]
-#         probs, gts = zip(*predictions)
-#         probs, gts = torch.concat(probs, dim=0), torch.concat(gts, dim=0)
-
-#         preds = (probs, gts)
-#         if self.splits:
-#             preds = self._split_preds(preds)
-
-#         torch.save(preds, os.path.join(self.output_dir, f"{self.output_file}.pt"))
-
-#     def _split_preds(self, preds):
-#         group_names = list(self.splits.keys())
-#         group_sizes = list(self.splits.values())
-
-#         probs = torch.split(preds[0], group_sizes)
-#         gts = torch.split(preds[1], group_sizes)
-
-#         split_preds = dict()
-#         for group_name, prob, gt in zip(group_names, probs, gts):
-#             split_preds[group_name] = (prob, gt)
-
-#         return split_preds
-
 class PredictionWriter(BasePredictionWriter):
     '''Blabla
 
@@ -75,6 +36,7 @@ class PredictionWriter(BasePredictionWriter):
         self.output_dir = output_dir
         self.output_file = output_file
         self.dataset_names = dataset_names
+        Path(self.output_dir).mkdir(parents=True, exist_ok=True)
 
     def write_on_epoch_end(self, trainer, pl_module, predictions, batch_indices):
 
